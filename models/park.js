@@ -56,8 +56,23 @@ Park.prototype.visitorsPerYear = function(){
 
 Park.prototype.totalRevenuePA = function() {
   let totalRevenue = this.visitorsPerYear() * this.price;
-  return totalRevenue
+  return totalRevenue;
 
+};
+
+Park.prototype.removeSpecies = function(species) {
+  let speciesFiltered = this.speciesFilter(species);
+  for (let dino of speciesFiltered) {
+    this.removeDino(dino);
+  }
+}
+
+Park.prototype.allSpecies = function() {
+  let speciesHash = {}
+  for (let dino of this.dinosaurs) {
+    speciesHash[dino.species] = (speciesHash[dino.species]+1) || 1;
+  }
+  return speciesHash
 }
 
 

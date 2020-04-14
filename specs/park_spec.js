@@ -93,11 +93,30 @@ describe('Park', function() {
   it('should be able to calculate total revenue for one year', function(){
     //given park
     //when totalRevenuePA is run
-    //total revenue for one year is returned.
+    //then total revenue for one year is returned.
 
     const actual = park.totalRevenuePA()
     assert.strictEqual(actual, 36500000)
 
+  });
+
+  it('should be able to remove all dinorasurs of a particular species', function(){
+    //given a park and a species to remove
+    //when removeSpecies is run
+    //then the park does not contain that species.
+    park.removeSpecies('Stegasaurus')
+    const actual = park.dinosaurs.length
+    assert.strictEqual(actual, 2)
+
+
+  });
+
+  it('should provide an object tallying each species in the park', function(){
+    //given a park
+    //when park.allSpecies is run
+    //then a hash object is return with the an entry for each species and the number
+    const actual = park.allSpecies()
+    assert.deepStrictEqual(actual, {'t-rex':1 , 'Raptor':1, 'Stegasaurus':1})
   });
 
 });

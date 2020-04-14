@@ -7,6 +7,7 @@ describe('Park', function() {
   let dinosaur1;
   let dinosaur2;
   let dinosaur3;
+  let dinosaur4;
   let dinosaurs;
 
   let park;
@@ -15,6 +16,7 @@ describe('Park', function() {
     dinosaur1 = new Dinosaur('t-rex', 'carnivore', 50);
     dinosaur2 = new Dinosaur('Raptor', 'carnivore', 40);
     dinosaur3 = new Dinosaur('Stegasaurus', 'herbivore', 10);
+    dinosaur4 = new Dinosaur('Dave', 'omnivore', 1);
     dinosaurs = [dinosaur1, dinosaur2, dinosaur3]
 
     park = new Park('Jurassic Park', 1000.00, dinosaurs)
@@ -35,18 +37,67 @@ describe('Park', function() {
     assert.deepStrictEqual(actual, [dinosaur1, dinosaur2, dinosaur3]);
   });
 
-  it('should be able to add a dinosaur to its collection');
+  it('should be able to add a dinosaur to its collection', function() {
+    //given another dinosaur
+    //when added to collection
+    // dino is added to collection
+    park.addDino(dinosaur4)
+    const actual = park.dinosaurs.length
+    assert.strictEqual(actual, 4);
+  });
 
-  it('should be able to remove a dinosaur from its collection');
+  it('should be able to remove a dinosaur from its collection', function() {
+    //given a dinosaur object to remove
+    //when i run park.removeDino
+    //then dinosaur is not present in array.
+    park.removeDino(dinosaur2);
+    const actual = park.dinosaurs;
+    assert.deepStrictEqual(actual, [dinosaur1, dinosaur3]);
+  });
 
-  it('should be able to find the dinosaur that attracts the most visitors');
+  it('should be able to find the dinosaur that attracts the most visitors', function() {
+    //given our park
+    //when i run mvpDinos method
+    //then I get the most popular dinosaurs back
+    const actual = park.mvpDinos();
+    assert.deepStrictEqual(actual, [dinosaur1]);
 
-  it('should be able to find all dinosaurs of a particular species');
+  });
 
-  it('should be able to calculate the total number of visitors per day');
+  it('should be able to find all dinosaurs of a particular species', function() {
+    //given a park
+    //when dino filter is run
+    //then an array of dinos by species is returned
+    const actual = park.speciesFilter('t-rex');
+    assert.deepStrictEqual(actual, [dinosaur1])
+  });
 
-  it('should be able to calculate the total number of visitors per year');
+  it('should be able to calculate the total number of visitors per day', function() {
+    //given park
+    //when vistorSum
+    //then number of visitors is returned. Assuming each visit to each dinosaur is counted as one visit to the park. Bit savage charging a grand for 1 dino.
+    const actual = park.visitorSum();
+    assert.strictEqual(actual, 100);
 
-  it('should be able to calculate total revenue for one year');
+  });
+
+  it('should be able to calculate the total number of visitors per year', function(){
+    //given park
+    //when vistorsPerYear is run
+    //then number of visitors is returned. Excluding leap years, but hey this is assuming a consitant number fo visitors throughout the year so really not really needing to be that accurate.
+    const actual = park.visitorsPerYear();
+    assert.strictEqual(actual, 36500);
+
+  });
+
+  it('should be able to calculate total revenue for one year', function(){
+    //given park
+    //when totalRevenuePA is run
+    //total revenue for one year is returned.
+
+    const actual = park.totalRevenuePA()
+    assert.strictEqual(actual, 36500000)
+
+  });
 
 });

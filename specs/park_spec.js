@@ -8,6 +8,7 @@ describe('Park', function() {
   let dinosaur2;
   let dinosaur3;
   let dinosaur4;
+  let dinosaur5;
   let dinosaurs;
 
   let park;
@@ -17,6 +18,7 @@ describe('Park', function() {
     dinosaur2 = new Dinosaur('Raptor', 'carnivore', 40);
     dinosaur3 = new Dinosaur('Stegasaurus', 'herbivore', 10);
     dinosaur4 = new Dinosaur('Dave', 'omnivore', 1);
+    dinosaur5 = new Dinosaur('Jim', 'omnivore', 50);
     dinosaurs = [dinosaur1, dinosaur2, dinosaur3]
 
     park = new Park('Jurassic Park', 1000.00, dinosaurs)
@@ -61,6 +63,16 @@ describe('Park', function() {
     //then I get the most popular dinosaurs back
     const actual = park.mvpDinos();
     assert.deepStrictEqual(actual, [dinosaur1]);
+
+  });
+
+  it('should be able to find the dinosaur that attracts the most visitors two dinosaurs', function() {
+    //given our park
+    //when i run mvpDinos method
+    //then I get the most popular dinosaurs back
+    park.addDino(dinosaur5)
+    const actual = park.mvpDinos();
+    assert.deepStrictEqual(actual, [dinosaur1, dinosaur5]);
 
   });
 
